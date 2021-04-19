@@ -1,15 +1,15 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Sidebar from './components/Sidebar'
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Chatty</title>
         <link rel="icon" href="/chatty.ico" />
       </Head>
 
-      <h1>Chatty app</h1>
+      <Sidebar />
     </div>
   )
 }
