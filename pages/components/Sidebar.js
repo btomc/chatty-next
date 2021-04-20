@@ -28,7 +28,7 @@ function Sidebar() {
                 Start a new chat
             </SidebarButton>
 
-            {/* List of Chats */}
+            {/* List of Chats */} 49
         </Container>
     )
 }
