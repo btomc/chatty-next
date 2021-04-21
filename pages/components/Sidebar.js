@@ -40,7 +40,7 @@ function Sidebar() {
                 Start a new chat
             </SidebarButton>
 
-            {/* List of Chats */} 49
+            {/* List of Chats */}
         </Container>
     )
 }
