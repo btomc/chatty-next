@@ -4,7 +4,7 @@ import ChatIcon from '@material-ui/icons/Chat'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import SearchIcon from '@material-ui/icons/Search'
 import * as EmailValidator from 'email-validator'
-import { auth, db } from '../../firebase'
+import { auth, db } from '../firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import Chat from './Chat'
@@ -38,7 +38,7 @@ function Sidebar() {
     return (
         <Container>
             <Header>
-                <UserAvatar onClick={() => auth.signOut()} />
+                <UserAvatar src={user.photoURL} onClick={() => auth.signOut()} />
                 <IconsContainer>
                     <IconButton>
                         <ChatIcon style={{ color: '#fff'}} />
@@ -60,7 +60,7 @@ function Sidebar() {
 
             {/* List of Chats */}
             {chatsSnapshot?.docs.map(chat => (
-                <Chat key={chat.id} id={chat.id} user={chat.data().users} />
+                <Chat key={chat.id} id={chat.id} users={chat.data().users} />
             ))}
         </Container>
     )

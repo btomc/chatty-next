@@ -3,7 +3,7 @@ import React, {useEffect} from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, db } from '../firebase'
 import Login from '../pages/login'
-import Loading from './components/Loading'
+import Loading from '../components/Loading'
 import firebase from 'firebase'
 
 function MyApp({ Component, pageProps }) {
