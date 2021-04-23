@@ -9,7 +9,7 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon'
 import MicIcon from '@material-ui/icons/Mic'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import Message from './Message'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import firebase from 'firebase'
 import getRecipientEmail from '../utils/getRecipientEmail'
 import TimeAgo from 'timeago-react'
@@ -18,6 +18,7 @@ function ChatScreen({ chat, messages}) {
     // console.log(chat, messages)
     const [user] = useAuthState(auth)
     const [input, setInput] = useState('')
+    const endOfMessagesRef = useRef(null)
     const router = useRouter()
 
     const [messagesSnapshot] = useCollection(db.collection('chats').doc(router.query.id).collection('messages').orderBy('timestamp', 'asc'))
@@ -46,6 +47,13 @@ function ChatScreen({ chat, messages}) {
         }
     }
 
+    const scrollToBottom = () => {
+        endOfMessagesRef.current.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+        })
+    }
+
     const sendMessage = (e) => {
         e.preventDefault()
         
@@ -62,6 +70,7 @@ function ChatScreen({ chat, messages}) {
         })
 
         setInput('')
+        scrollToBottom()
     }
 
     const recipient = recipientSnapshot?.docs?.[0]?.data()
@@ -100,7 +109,7 @@ function ChatScreen({ chat, messages}) {
 
             <MessageContainer>
                 {showMessages()}
-                <EndOfMessage />
+                <EndOfMessage ref={endOfMessagesRef} />
             </MessageContainer>
 
             <InputContainer>
@@ -149,15 +158,13 @@ const HeaderIcons = styled.div``
 
 const MessageContainer = styled.div`
     padding: 30px;
-    /* background: #e5ded8;
-    background: #d1d1d1; */
-    background: #cbd2d6;
-    background: #dbf0fc;
-    background: #cce9f9;
+    background: #d2eaf7;
     min-height: 90vh;
 `
 
-const EndOfMessage = styled.div``
+const EndOfMessage = styled.div`
+    margin-bottom: 50px;
+`
 
 const InputContainer = styled.form`
     display: flex;
