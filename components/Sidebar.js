@@ -69,7 +69,19 @@ function Sidebar() {
 export default Sidebar
 
 const Container = styled.div`
+    flex: 0.45;
+    /* border-right: 1px solid whitesmoke; */
+    height: 100vh;
+    min-width: 300px;
+    max-width: 350px;
+    overflow-y: scroll;
 
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 `
 
 const Header = styled.div`
@@ -83,7 +95,7 @@ const Header = styled.div`
     align-items: center;
     padding: 15px;
     height: 80px;
-    border-bottom: 1px solid whitesmoke;
+    /* border-bottom: 1px solid whitesmoke; */
 `
 
 const UserAvatar = styled(Avatar)`
