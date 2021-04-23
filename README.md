@@ -1,3 +1,9 @@
+# chatty app
+
+It is a simple messenger app build with Next.js - with 1-1 Messaging, Live Status, React.js & Styled-Components.
+
+Visit on https://chatty-next-btomc.vercel.app/
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
