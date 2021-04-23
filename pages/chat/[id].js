@@ -8,6 +8,8 @@ import getRecipientEmail from '../../utils/getRecipientEmail'
 
 function Chat({ chat, messages }) {
     const [user] = useAuthState(auth)
+    // console.log(chat)
+    // console.log(messages)
 
     return (
         <Container>

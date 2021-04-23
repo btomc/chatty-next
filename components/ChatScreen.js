@@ -11,12 +11,17 @@ import { useCollection } from 'react-firebase-hooks/firestore'
 import Message from './Message'
 import { useState } from 'react'
 import firebase from 'firebase'
+import getRecipientEmail from '../utils/getRecipientEmail'
+import TimeAgo from 'timeago-react'
 
 function ChatScreen({ chat, messages}) {
+    // console.log(chat, messages)
     const [user] = useAuthState(auth)
     const [input, setInput] = useState('')
     const router = useRouter()
+
     const [messagesSnapshot] = useCollection(db.collection('chats').doc(router.query.id).collection('messages').orderBy('timestamp', 'asc'))
+    const [recipientSnapshot] = useCollection(db.collection('users').where('email', '==', getRecipientEmail(chat.users, user)))
 
     const showMessages = () => {
         if(messagesSnapshot) {
@@ -59,13 +64,29 @@ function ChatScreen({ chat, messages}) {
         setInput('')
     }
 
+    const recipient = recipientSnapshot?.docs?.[0]?.data()
+    const recipientEmail = getRecipientEmail(chat.users, user)
+
     return (
         <Container>
             <Header>
-                <Avatar />
+                {recipient ? (
+                    <Avatar src={recipient?.photoURL} />
+                ) : (
+                    <Avatar>{recipientEmail[0]}</Avatar>
+                )}
+
                 <HeaderInfo>
-                    <h3>Recipient Email</h3>
-                    <p>Last seen ...</p>
+                    <h3>{recipientEmail}</h3>
+                    {recipientSnapshot ? (
+                        <p>Last active: {' '}
+                        {recipient?.lastSeen?.toDate() ? (
+                            <TimeAgo datetime={recipient?.lastSeen.toDate()} />
+                        ) : 'Unavailable'}
+                        </p>
+                    ) : (
+                        <p>Loading Last active</p>
+                    )}
                 </HeaderInfo>
                 <HeaderIcons>
                     <IconButton>
