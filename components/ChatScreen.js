@@ -152,6 +152,8 @@ const MessageContainer = styled.div`
     /* background: #e5ded8;
     background: #d1d1d1; */
     background: #cbd2d6;
+    background: #dbf0fc;
+    background: #cce9f9;
     min-height: 90vh;
 `
 

@@ -43,7 +43,8 @@ const Container = styled.div`
     word-break: break-word;
 
     &:hover {
-        background: #e9eaeb;
+        background: #a9ddfc;
+        opacity: 0.88;
     } 
 `
 
